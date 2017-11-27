@@ -3,12 +3,6 @@
 # Import text/calendar files from mutt to calcurse
 #
 
-# Check if calcurse is running
-if [ ! -f "$HOME/.calcurse/.calcurse.pid" ]; then
-  echo "QUIT"
-  exit 1
-fi
-
 function addToCalcurse() {
   # Extract attachments
   local tmpDir=$(mktemp -d add-to-calcurse.XXXXXXXX)
@@ -20,7 +14,10 @@ function addToCalcurse() {
 
   # Remove tmpDir and trigger a reload in calcurse
   rm -rf $tmpDir > /dev/null 2>&1
-  kill -USR1 `cat $HOME/.calcurse/.calcurse.pid` > /dev/null 2>&1
+  # Check if calcurse is running
+  if [ ! -f "$HOME/.calcurse/.calcurse.pid" ]; then
+    kill -USR1 `cat $HOME/.calcurse/.calcurse.pid` > /dev/null 2>&1
+  fi
 }
 
 addToCalcurse
