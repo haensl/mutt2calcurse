@@ -20,7 +20,7 @@ function addToCalcurse() {
 
   # Remove tmpDir and trigger a reload in calcurse
   rm -rf $tmpDir > /dev/null 2>&1
-  kill -URS1 `cat $HOME/.calcurse/.calcurse.pid` > /dev/null 2>&1
+  kill -USR1 `cat $HOME/.calcurse/.calcurse.pid` > /dev/null 2>&1
 }
 
 addToCalcurse
